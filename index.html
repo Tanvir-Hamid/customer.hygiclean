@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HygiClean (hygiclean.store) — Professional Hygiene & Cleaning Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for smooth corporate polish */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Top Corporate Announcement Bar -->
+    <div class="bg-brand-900 text-brand-50 text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-brand-300 shrink-0"></i>
+                <span>B2B & Retail Hygiene Supply Distribution • Hospitals, Offices, Restaurants & Homes</span>
+            </div>
+            <div id="topContactDisplay" class="hidden sm:flex items-center gap-4 text-brand-200">
+                <span class="flex items-center gap-1.5">
+                    <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                    hygiclean.store
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Sticky Header -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-3">
+                
+                <!-- Brand Logo -->
+                <a href="#" onclick="resetFilters(); return false;" class="flex items-center gap-3 shrink-0 group">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-md shadow-brand-600/20 group-hover:scale-105 transition-transform">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">HygiClean</span>
+                            <span class="hidden md:inline-block text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Pro</span>
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-slate-500 font-medium leading-none mt-0.5">hygiclean.store — Hygiene & Cleaning Solutions</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-4">
+                    <div class="relative w-full">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                        <input 
+                            type="text" 
+                            id="desktopSearchInput"
+                            oninput="handleSearch(this.value)"
+                            placeholder="Search products, categories, pack sizes..." 
+                            class="w-full pl-10 pr-9 py-2.5 bg-slate-100/80 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-brand-600 focus:ring-2 focus:ring-brand-600/15 transition-all"
+                        >
+                        <button id="clearSearchDesktop" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Header Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Admin Toggle Button -->
+                    <button 
+                        onclick="handleAdminAccess()" 
+                        id="headerAdminBtn"
+                        class="inline-flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all shadow-xs"
+                        title="Manage Storefront & Products"
+                    >
+                        <i data-lucide="lock" id="adminLockIcon" class="w-4 h-4 text-slate-500"></i>
+                        <span class="hidden sm:inline" id="headerAdminText">Admin</span>
+                    </button>
+
+                    <!-- Inquiry Cart Drawer Trigger -->
+                    <button 
+                        onclick="toggleInquiryDrawer(true)" 
+                        class="relative inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white hover:bg-brand-700 active:scale-[0.99] transition-all shadow-sm shadow-brand-600/20"
+                    >
+                        <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+                        <span>Inquiry List</span>
+                        <span id="cartBadge" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold rounded-full bg-white text-brand-700">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="md:hidden pb-3">
+                <div class="relative w-full">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input 
+                        type="text" 
+                        id="mobileSearchInput"
+                        oninput="handleSearch(this.value)"
+                        placeholder="Search cleaning & hygiene products..." 
+                        class="w-full pl-10 pr-9 py-2 bg-slate-100 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-brand-600 transition-all"
+                    >
+                    <button id="clearSearchMobile" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Mode Banner (Visible when Admin Mode is active) -->
+    <div id="adminBanner" class="hidden bg-amber-50 border-b border-amber-200 text-amber-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-medium">
+                <span class="inline-flex h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                <span>Admin Mode Active — Changes save automatically to this browser.</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="switchView('admin')" id="navToAdminBtn" class="px-3 py-1 rounded-lg bg-amber-600 text-white font-medium hover:bg-amber-700 transition">
+                    Open Product Manager
+                </button>
+                <button onclick="switchView('storefront')" id="navToStoreBtn" class="hidden px-3 py-1 rounded-lg bg-white border border-amber-300 text-amber-900 font-medium hover:bg-amber-100 transition">
+                    View Storefront
+                </button>
+                <button onclick="lockAdmin()" class="px-2.5 py-1 rounded-lg text-amber-800 hover:bg-amber-200/60 font-medium transition">
+                    Lock
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- ==================== VIEW 1: CUSTOMER STOREFRONT ==================== -->
+        <section id="storefrontView" class="space-y-6">
+            
+            <!-- Dynamic Category Filter Bar & Product Counter (Shown when products exist) -->
+            <div id="catalogToolbar" class="hidden flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
+                <div id="categoryPillsContainer" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                    <!-- Dynamic category pills injected here -->
+                </div>
+                <div class="flex items-center justify-between sm:justify-end gap-3 shrink-0 text-xs sm:text-sm text-slate-500">
+                    <span id="productCountLabel">0 products</span>
+                    <select id="sortSelect" onchange="renderCatalog()" class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 text-xs sm:text-sm focus:outline-none focus:border-brand-600">
+                        <option value="newest">Newest First</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Empty State (Initial Fresh State when 0 products exist) -->
+            <div id="emptyCatalogState" class="bg-white border border-slate-200 rounded-2xl p-8 sm:p-14 text-center max-w-2xl mx-auto my-6 shadow-xs animate-fade-in">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 border border-brand-100 flex items-center justify-center mx-auto mb-5">
+                    <i data-lucide="package-plus" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Welcome to HygiClean Storefront</h1>
+                <p class="text-sm sm:text-base text-slate-600 mb-6 leading-relaxed">
+                    Your product catalog is currently empty and ready for setup. Switch to <strong>Admin Mode</strong> to add your cleaning and hygiene products with photos, pack sizes, BDT pricing, and specifications.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button onclick="handleAdminAccess()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition shadow-sm shadow-brand-600/20">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Add Your First Product</span>
+                    </button>
+                    <button onclick="triggerQuickImport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 text-slate-700 font-medium text-sm hover:bg-slate-200 transition">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span>Import Catalog JSON</span>
+                    </button>
+                </div>
+                <p class="text-xs text-slate-400 mt-5">Default Admin PIN: <code class="px-1.5 py-0.5 bg-slate-100 rounded text-slate-600 font-mono">1234</code> (Customizable in Admin Settings)</p>
+            </div>
+
+            <!-- No Search Results State -->
+            <div id="noSearchResultsState" class="hidden bg-white border border-slate-200 rounded-2xl p-10 text-center max-w-lg mx-auto my-6">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="search-x" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-base font-semibold text-slate-900 mb-1">No matching products found</h3>
+                <p class="text-sm text-slate-500 mb-4">Try adjusting your search keywords or clearing the category filter.</p>
+                <button onclick="resetFilters()" class="px-4 py-2 rounded-xl bg-brand-50 text-brand-700 font-medium text-sm hover:bg-brand-100 transition">
+                    Reset All Filters
+                </button>
+            </div>
+
+            <!-- Responsive Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+                <!-- Product cards rendered dynamically via JS -->
+            </div>
+
+        </section>
+
+        <!-- ==================== VIEW 2: ADMIN PRODUCT MANAGER ==================== -->
+        <section id="adminView" class="hidden space-y-6 animate-fade-in">
+            
+            <!-- Admin Header & Backup Tools -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-100 text-brand-800">Admin Dashboard</span>
+                        <span class="text-xs text-slate-400">hygiclean.store</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Catalog & Store Manager</h2>
+                    <p class="text-sm text-slate-500">Add products, manage inventory details, configure WhatsApp ordering, or export backups.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <button onclick="switchView('storefront')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 text-slate-700 text-xs sm:text-sm font-medium hover:bg-slate-50 transition">
+                        <i data-lucide="eye" class="w-4 h-4"></i>
+                        <span>Preview Storefront</span>
+                    </button>
+                    <button onclick="exportCatalogJSON()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-medium hover:bg-slate-900 transition">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export JSON</span>
+                    </button>
+                    <label class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-50 text-brand-700 border border-brand-200 text-xs sm:text-sm font-medium hover:bg-brand-100 transition cursor-pointer">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span>Import JSON</span>
+                        <input type="file" id="importJsonInput" accept=".json,application/json" onchange="importCatalogJSON(event)" class="hidden">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Admin Grid: Left = Add/Edit Form, Right = Inventory & Store Settings -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- Add / Edit Product Form (5 cols on lg) -->
+                <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <h3 id="formHeading" class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="plus-square" class="w-5 h-5 text-brand-600"></i>
+                            <span>Add New Product</span>
+                        </h3>
+                        <button type="button" id="cancelEditBtn" onclick="resetProductForm()" class="hidden text-xs font-medium text-slate-500 hover:text-slate-800 underline">
+                            Cancel Edit
+                        </button>
+                    </div>
+
+                    <form id="productForm" onsubmit="saveProduct(event)" class="space-y-4">
+                        <input type="hidden" id="editProductId" value="">
+
+                        <!-- Product Name -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Product Name *</label>
+                            <input type="text" id="prodName" required placeholder="e.g., Antiseptic Floor Cleaner Lemon" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/15">
+                        </div>
+
+                        <!-- Category Selection + Custom Option -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Category *</label>
+                                <select id="prodCategorySelect" onchange="toggleCustomCategory(this.value)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:border-brand-600">
+                                    <option value="Floor Cleaners">Floor Cleaners</option>
+                                    <option value="Disinfectants & Sanitizers">Disinfectants & Sanitizers</option>
+                                    <option value="Tissue & Paper Products">Tissue & Paper Products</option>
+                                    <option value="Hand Hygiene & Soap">Hand Hygiene & Soap</option>
+                                    <option value="Kitchen & Dishwashing">Kitchen & Dishwashing</option>
+                                    <option value="Glass & Surface Cleaners">Glass & Surface Cleaners</option>
+                                    <option value="Washroom & Toilet Care">Washroom & Toilet Care</option>
+                                    <option value="Waste Management">Waste Management</option>
+                                    <option value="Cleaning Tools & Mops">Cleaning Tools & Mops</option>
+                                    <option value="__custom__">+ Custom Category...</option>
+                                </select>
+                            </div>
+
+                            <div id="customCategoryWrapper" class="hidden">
+                                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Custom Category *</label>
+                                <input type="text" id="prodCustomCategory" placeholder="Enter category name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                            </div>
+
+                            <div id="unitWrapper">
+                                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Unit / Pack Size *</label>
+                                <input type="text" id="prodUnit" required placeholder="e.g., 5 Liter Jar / 1 Box" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                            </div>
+                        </div>
+
+                        <!-- Price in BDT -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Price in BDT (৳) *</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 font-semibold text-sm">৳</span>
+                                <input type="number" id="prodPrice" required min="0" step="any" placeholder="0.00" class="w-full pl-8 pr-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/15">
+                            </div>
+                        </div>
+
+                        <!-- Product Image: Upload (with automatic compression) OR URL -->
+                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Product Image</label>
+                                <span class="text-[11px] text-slate-400">Auto-compressed for fast storage</span>
+                            </div>
+
+                            <!-- Image Preview Box -->
+                            <div id="imagePreviewContainer" class="hidden relative w-full h-40 rounded-xl overflow-hidden bg-white border border-slate-200 flex items-center justify-center">
+                                <img id="imagePreviewImg" src="" alt="Preview" class="max-h-full max-w-full object-contain">
+                                <button type="button" onclick="clearFormImage()" class="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-900/75 text-white hover:bg-red-600 transition" title="Remove Image">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-2.5">
+                                <label class="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-dashed border-brand-400 bg-white text-brand-700 text-xs font-semibold hover:bg-brand-50 transition cursor-pointer">
+                                    <i data-lucide="image-plus" class="w-4 h-4"></i>
+                                    <span>Upload Photo from Device</span>
+                                    <input type="file" id="prodImageFile" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
+                                </label>
+                                <div class="relative flex items-center">
+                                    <span class="text-[11px] text-slate-400 mr-2 shrink-0">OR URL:</span>
+                                    <input type="url" id="prodImageUrl" oninput="handleImageUrlInput(this.value)" placeholder="https://example.com/product.jpg" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs focus:outline-none focus:border-brand-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Description -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Description & Specifications</label>
+                            <textarea id="prodDescription" rows="4" placeholder="Enter usage instructions, active ingredients, dilution ratio, carton quantity, or B2B bulk notes..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/15"></textarea>
+                        </div>
+
+                        <button type="submit" id="saveProductBtn" class="w-full py-3 px-4 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition shadow-sm shadow-brand-600/20 flex items-center justify-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            <span>Save Product to Catalog</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Product Inventory Table + Storefront Settings (7 cols on lg) -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Added Products List -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs">
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                            <div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900">Manage Products (<span id="adminProductCount">0</span>)</h3>
+                                <p class="text-xs text-slate-500">Edit or remove items listed on hygiclean.store</p>
+                            </div>
+                            <button onclick="confirmClearAllProducts()" id="clearAllBtn" class="hidden text-xs font-medium text-red-600 hover:text-red-700 px-2.5 py-1.5 rounded-lg hover:bg-red-50 transition">
+                                Delete All
+                            </button>
+                        </div>
+
+                        <!-- Empty Admin List State -->
+                        <div id="adminEmptyList" class="py-10 text-center text-slate-400">
+                            <i data-lucide="inbox" class="w-10 h-10 mx-auto mb-2 text-slate-300"></i>
+                            <p class="text-sm font-medium text-slate-600">No products added yet</p>
+                            <p class="text-xs mt-0.5">Use the form on the left to add your first item.</p>
+                        </div>
+
+                        <!-- Inventory List Container -->
+                        <div id="adminProductList" class="divide-y divide-slate-100 max-h-[540px] overflow-y-auto pr-1">
+                            <!-- Admin product rows rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Store Contact & Security Settings -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs">
+                        <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                            <i data-lucide="settings" class="w-4 h-4 text-brand-600"></i>
+                            <span>Storefront & WhatsApp Settings</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Configure where customer inquiries are sent and update your Admin PIN.</p>
+
+                        <form onsubmit="saveStoreSettings(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">WhatsApp Order Number (with Country Code)</label>
+                                <input type="text" id="settingWhatsapp" placeholder="e.g., 8801700000000" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                                <p class="text-[11px] text-slate-400 mt-1">Include 880 for Bangladesh without + sign</p>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Display Phone / Hotline</label>
+                                <input type="text" id="settingPhone" placeholder="e.g., +880 17XX-XXXXXX" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Corporate Email</label>
+                                <input type="email" id="settingEmail" placeholder="e.g., sales@hygiclean.store" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Admin Access PIN</label>
+                                <input type="text" id="settingPin" maxlength="12" placeholder="Default: 1234" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-mono focus:outline-none focus:border-brand-600">
+                            </div>
+                            <div class="sm:col-span-2 flex justify-end">
+                                <button type="submit" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-medium hover:bg-slate-900 transition">
+                                    Save Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white border-t border-slate-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center gap-2.5 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-lg font-bold text-slate-900">HygiClean</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed max-w-sm">
+                        Trusted B2B and retail distribution partner for professional cleaning chemicals, sanitizers, tissue dispensers, and institutional hygiene supplies.
+                    </p>
+                </div>
+
+                <!-- Sectors Served -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Sectors We Supply</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Hospitals, Clinics & Diagnostics</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Corporate Offices & Commercial Buildings</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Hotels, Restaurants & Catering (HORECA)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Households & Retail Consumers</li>
+                    </ul>
+                </div>
+
+                <!-- Corporate Contact -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Corporate & Order Desk</h4>
+                    <div id="footerContactDetails" class="space-y-2.5 text-sm text-slate-600">
+                        <p class="flex items-center gap-2">
+                            <i data-lucide="globe" class="w-4 h-4 text-brand-600 shrink-0"></i>
+                            <span>hygiclean.store</span>
+                        </p>
+                        <p id="footerPhoneRow" class="hidden flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-brand-600 shrink-0"></i>
+                            <span id="footerPhoneText"></span>
+                        </p>
+                        <p id="footerEmailRow" class="hidden flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-brand-600 shrink-0"></i>
+                            <span id="footerEmailText"></span>
+                        </p>
+                        <p id="footerNoContactHint" class="text-xs text-slate-400 italic">
+                            Add phone & WhatsApp contact details in Admin Settings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+                <p>&copy; <span id="currentYear"></span> HygiClean (hygiclean.store). All rights reserved.</p>
+                <button onclick="handleAdminAccess()" class="text-slate-500 hover:text-brand-600 font-medium flex items-center gap-1 transition">
+                    <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                    <span>Admin / Manage Products</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL: PRODUCT DETAILS ==================== -->
+    <div id="productDetailModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-fade-in">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+                <span id="modalCategoryBadge" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">Category</span>
+                <button onclick="closeProductModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-6">
+                <!-- Product Image -->
+                <div class="aspect-square rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center overflow-hidden p-4">
+                    <img id="modalProductImg" src="" alt="Product" class="max-h-full max-w-full object-contain">
+                </div>
+
+                <!-- Product Info -->
+                <div class="flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 id="modalProductName" class="text-xl font-bold text-slate-900 leading-snug">Product Title</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span id="modalProductUnit" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">
+                                <i data-lucide="package" class="w-3.5 h-3.5"></i>
+                                <span>Unit</span>
+                            </span>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <span class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Unit Price</span>
+                            <div id="modalProductPrice" class="text-2xl font-bold text-brand-700 mt-0.5">৳ 0</div>
+                        </div>
+
+                        <div class="mt-4">
+                            <span class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Details & Specifications</span>
+                            <p id="modalProductDesc" class="text-sm text-slate-600 mt-1.5 whitespace-pre-line leading-relaxed max-h-40 overflow-y-auto pr-1">
+                                No description provided.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+                        <button id="modalAddToInquiryBtn" class="w-full py-2.5 px-4 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition flex items-center justify-center gap-2 shadow-sm">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Add to Inquiry List</span>
+                        </button>
+                        <button id="modalDirectWhatsappBtn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-sm hover:bg-emerald-100 transition flex items-center justify-center gap-2">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Direct Inquiry via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DRAWER: INQUIRY / ORDER QUOTE LIST ==================== -->
+    <div id="inquiryDrawerOverlay" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs transition-opacity" onclick="toggleInquiryDrawer(false)"></div>
+    <aside id="inquiryDrawer" class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white shadow-2xl border-l border-slate-200 transform translate-x-full transition-transform duration-300 flex flex-col">
+        
+        <!-- Drawer Header -->
+        <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-brand-600 text-white flex items-center justify-center">
+                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">Inquiry & Quote List</h3>
+                    <p class="text-xs text-slate-500">B2B Bulk & Retail Order Summary</p>
+                </div>
+            </div>
+            <button onclick="toggleInquiryDrawer(false)" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Items -->
+        <div id="inquiryItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-3">
+            <!-- Cart items injected here -->
+        </div>
+
+        <!-- Drawer Footer (Customer Note + WhatsApp / Copy Actions) -->
+        <div id="inquiryDrawerFooter" class="hidden border-t border-slate-200 p-5 bg-slate-50 space-y-3">
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-slate-600 font-medium">Estimated Total:</span>
+                <span id="inquiryTotalAmount" class="text-lg font-bold text-slate-900">৳ 0</span>
+            </div>
+
+            <div>
+                <input type="text" id="customerOrgInput" placeholder="Your Name / Company / Hospital (Optional)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm focus:outline-none focus:border-brand-600">
+            </div>
+
+            <div class="grid grid-cols-1 gap-2">
+                <button onclick="sendInquiryViaWhatsApp()" class="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Send Order Inquiry via WhatsApp</span>
+                </button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="copyInquirySummary()" class="py-2 px-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium text-xs hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Copy Summary</span>
+                    </button>
+                    <button onclick="clearInquiryCart()" class="py-2 px-3 rounded-xl bg-white border border-slate-200 text-red-600 font-medium text-xs hover:bg-red-50 transition flex items-center justify-center gap-1.5">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        <span>Clear List</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ==================== MODAL: ADMIN PIN LOGIN ==================== -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 animate-fade-in">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+                    <i data-lucide="key-round" class="w-5 h-5"></i>
+                </div>
+                <button onclick="closeAdminLoginModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Admin Access</h3>
+            <p class="text-xs text-slate-500 mt-1 mb-4">Enter your Admin PIN to manage products and settings on hygiclean.store.</p>
+
+            <form onsubmit="verifyAdminPin(event)" class="space-y-4">
+                <div>
+                    <input type="password" id="adminPinInput" required placeholder="Enter PIN (Default: 1234)" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-center text-lg tracking-widest font-mono focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/15">
+                    <p id="pinErrorMsg" class="hidden text-xs text-red-600 mt-1.5 text-center font-medium">Incorrect PIN. Please try again.</p>
+                </div>
+                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition">
+                    Unlock Admin Manager
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: CONFIRMATION DIALOG ==================== -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 animate-fade-in">
+            <h3 id="confirmTitle" class="text-base font-bold text-slate-900">Confirm Action</h3>
+            <p id="confirmMessage" class="text-sm text-slate-600 mt-1.5 mb-5">Are you sure you want to proceed?</p>
+            <div class="flex items-center justify-end gap-2.5">
+                <button onclick="closeConfirmModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-xs sm:text-sm font-medium hover:bg-slate-50 transition">Cancel</button>
+                <button id="confirmProceedBtn" class="px-4 py-2 rounded-xl bg-red-600 text-white text-xs sm:text-sm font-semibold hover:bg-red-700 transition">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- ==================== APPLICATION JAVASCRIPT ==================== -->
+    <script>
+        // Storage Keys (Namespaced for HygiClean)
+        const STORAGE_KEYS = {
+            PRODUCTS: 'hygiclean_catalog_products_v1',
+            SETTINGS: 'hygiclean_store_settings_v1',
+            CART: 'hygiclean_inquiry_cart_v1',
+            ADMIN_SESSION: 'hygiclean_admin_unlocked_v1'
+        };
+
+        // Clean SVG Fallback Image (Data URI - zero external dependency)
+        const FALLBACK_PRODUCT_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+                <rect width="400" height="400" fill="#f8fafc"/>
+                <rect x="135" y="110" width="130" height="180" rx="20" fill="#e2e8f0"/>
+                <rect x="170" y="85" width="60" height="30" rx="8" fill="#cbd5e1"/>
+                <circle cx="200" cy="200" r="32" fill="#0d9488" fill-opacity="0.15"/>
+                <path d="M200 182v36M182 200h36" stroke="#0d9488" stroke-width="5" stroke-linecap="round"/>
+                <text x="200" y="330" font-family="sans-serif" font-size="14" font-weight="600" fill="#94a3b8" text-anchor="middle">HygiClean Product</text>
+            </svg>
+        `)}`;
+
+        // Application State (Starts completely empty by default)
+        let products = [];
+        let settings = {
+            whatsapp: '',
+            phone: '',
+            email: '',
+            pin: '1234'
+        };
+        let inquiryCart = []; // [{ productId, qty }]
+        let isAdminUnlocked = false;
+        let currentView = 'storefront'; // 'storefront' | 'admin'
+        let selectedCategory = 'All';
+        let searchQuery = '';
+        let currentFormImageBase64 = '';
+        let pendingConfirmCallback = null;
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            loadStateFromStorage();
+            updateAdminUIState();
+            renderSettingsToUI();
+            renderCatalog();
+            renderAdminProductList();
+            renderInquiryCart();
+            lucide.createIcons();
+        });
+
+        function loadStateFromStorage() {
+            try {
+                const savedProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
+                if (savedProducts) {
+                    const parsed = JSON.parse(savedProducts);
+                    if (Array.isArray(parsed)) products = parsed;
+                }
+
+                const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+                if (savedSettings) {
+                    settings = { ...settings, ...JSON.parse(savedSettings) };
+                }
+
+                const savedCart = localStorage.getItem(STORAGE_KEYS.CART);
+                if (savedCart) {
+                    const parsedCart = JSON.parse(savedCart);
+                    if (Array.isArray(parsedCart)) {
+                        // Filter out cart items whose products no longer exist
+                        inquiryCart = parsedCart.filter(item => products.some(p => p.id === item.productId));
+                    }
+                }
+
+                isAdminUnlocked = sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) === 'true';
+            } catch (err) {
+                console.error('Error loading localStorage data:', err);
+            }
+        }
+
+        function saveProductsToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+                return true;
+            } catch (e) {
+                showToast('Storage limit reached! Try using smaller product images or export a JSON backup.', 'error');
+                return false;
+            }
+        }
+
+        function saveCartToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(inquiryCart));
+            } catch (e) {
+                console.error('Cart storage error', e);
+            }
+        }
+
+        // ==================== ADMIN AUTH & NAVIGATION ====================
+        function handleAdminAccess() {
+            if (isAdminUnlocked) {
+                switchView(currentView === 'admin' ? 'storefront' : 'admin');
+            } else {
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('pinErrorMsg').classList.add('hidden');
+                document.getElementById('adminLoginModal').classList.remove('hidden');
+                setTimeout(() => document.getElementById('adminPinInput').focus(), 100);
+            }
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminPin(e) {
+            e.preventDefault();
+            const enteredPin = document.getElementById('adminPinInput').value.trim();
+            const activePin = settings.pin || '1234';
+
+            if (enteredPin === activePin) {
+                isAdminUnlocked = true;
+                sessionStorage.setItem(STORAGE_KEYS.ADMIN_SESSION, 'true');
+                closeAdminLoginModal();
+                updateAdminUIState();
+                switchView('admin');
+                showToast('Admin Mode unlocked', 'success');
+            } else {
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
+            }
+        }
+
+        function lockAdmin() {
+            isAdminUnlocked = false;
+            sessionStorage.removeItem(STORAGE_KEYS.ADMIN_SESSION);
+            updateAdminUIState();
+            switchView('storefront');
+            showToast('Admin Mode locked', 'info');
+        }
+
+        function updateAdminUIState() {
+            const banner = document.getElementById('adminBanner');
+            const lockIcon = document.getElementById('adminLockIcon');
+            const headerAdminText = document.getElementById('headerAdminText');
+
+            if (isAdminUnlocked) {
+                banner.classList.remove('hidden');
+                lockIcon.setAttribute('data-lucide', 'unlock');
+                lockIcon.classList.remove('text-slate-500');
+                lockIcon.classList.add('text-brand-600');
+                headerAdminText.textContent = currentView === 'admin' ? 'Storefront' : 'Manage';
+            } else {
+                banner.classList.add('hidden');
+                lockIcon.setAttribute('data-lucide', 'lock');
+                lockIcon.classList.add('text-slate-500');
+                lockIcon.classList.remove('text-brand-600');
+                headerAdminText.textContent = 'Admin';
+            }
+            lucide.createIcons();
+        }
+
+        function switchView(viewName) {
+            currentView = viewName;
+            const storefrontEl = document.getElementById('storefrontView');
+            const adminEl = document.getElementById('adminView');
+            const navToAdminBtn = document.getElementById('navToAdminBtn');
+            const navToStoreBtn = document.getElementById('navToStoreBtn');
+
+            if (viewName === 'admin' && isAdminUnlocked) {
+                storefrontEl.classList.add('hidden');
+                adminEl.classList.remove('hidden');
+                navToAdminBtn.classList.add('hidden');
+                navToStoreBtn.classList.remove('hidden');
+                renderAdminProductList();
+            } else {
+                currentView = 'storefront';
+                adminEl.classList.add('hidden');
+                storefrontEl.classList.remove('hidden');
+                navToAdminBtn.classList.remove('hidden');
+                navToStoreBtn.classList.add('hidden');
+                renderCatalog();
+            }
+            updateAdminUIState();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== IMAGE UPLOAD & CLIENT COMPRESSION ====================
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast('Please select a valid image file.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // Compress & resize image to max 700px so localStorage stays lightweight
+                    const MAX_DIM = 700;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > MAX_DIM || height > MAX_DIM) {
+                        if (width > height) {
+                            height = Math.round((height * MAX_DIM) / width);
+                            width = MAX_DIM;
+                        } else {
+                            width = Math.round((width * MAX_DIM) / height);
+                            height = MAX_DIM;
+                        }
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Export as compressed JPEG
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.78);
+                    currentFormImageBase64 = compressedDataUrl;
+                    document.getElementById('prodImageUrl').value = '';
+                    showImagePreview(compressedDataUrl);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleImageUrlInput(url) {
+            const trimmed = url.trim();
+            if (trimmed) {
+                currentFormImageBase64 = '';
+                document.getElementById('prodImageFile').value = '';
+                showImagePreview(trimmed);
+            } else if (!currentFormImageBase64) {
+                hideImagePreview();
+            }
+        }
+
+        function showImagePreview(src) {
+            const container = document.getElementById('imagePreviewContainer');
+            const img = document.getElementById('imagePreviewImg');
+            img.src = src;
+            img.onerror = () => { img.src = FALLBACK_PRODUCT_SVG; };
+            container.classList.remove('hidden');
+        }
+
+        function hideImagePreview() {
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('imagePreviewImg').src = '';
+        }
+
+        function clearFormImage() {
+            currentFormImageBase64 = '';
+            document.getElementById('prodImageFile').value = '';
+            document.getElementById('prodImageUrl').value = '';
+            hideImagePreview();
+        }
+
+        // ==================== ADMIN PRODUCT CRUD ====================
+        function toggleCustomCategory(val) {
+            const customWrapper = document.getElementById('customCategoryWrapper');
+            const customInput = document.getElementById('prodCustomCategory');
+            if (val === '__custom__') {
+                customWrapper.classList.remove('hidden');
+                customInput.required = true;
+            } else {
+                customWrapper.classList.add('hidden');
+                customInput.required = false;
+            }
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+
+            const editId = document.getElementById('editProductId').value;
+            const name = document.getElementById('prodName').value.trim();
+            const catSelect = document.getElementById('prodCategorySelect').value;
+            const customCat = document.getElementById('prodCustomCategory').value.trim();
+            const category = catSelect === '__custom__' ? (customCat || 'General Hygiene') : catSelect;
+            const unit = document.getElementById('prodUnit').value.trim();
+            const price = parseFloat(document.getElementById('prodPrice').value) || 0;
+            const description = document.getElementById('prodDescription').value.trim();
+            const urlInput = document.getElementById('prodImageUrl').value.trim();
+            const finalImage = currentFormImageBase64 || urlInput || '';
+
+            if (!name || !unit) {
+                showToast('Please fill in required product fields.', 'error');
+                return;
+            }
+
+            if (editId) {
+                const idx = products.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    products[idx] = {
+                        ...products[idx],
+                        name,
+                        category,
+                        unit,
+                        price,
+                        image: finalImage,
+                        description,
+                        updatedAt: Date.now()
+                    };
+                }
+            } else {
+                const newProduct = {
+                    id: 'prod_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+                    name,
+                    category,
+                    unit,
+                    price,
+                    image: finalImage,
+                    description,
+                    createdAt: Date.now()
+                };
+                products.unshift(newProduct);
+            }
+
+            if (saveProductsToStorage()) {
+                showToast(editId ? 'Product updated successfully!' : 'Product added to HygiClean catalog!', 'success');
+                resetProductForm();
+                renderAdminProductList();
+                renderCatalog();
+            }
+        }
+
+        function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('prodName').value = product.name;
+            document.getElementById('prodUnit').value = product.unit;
+            document.getElementById('prodPrice').value = product.price;
+            document.getElementById('prodDescription').value = product.description || '';
+
+            // Handle category dropdown vs custom
+            const selectEl = document.getElementById('prodCategorySelect');
+            const optionExists = Array.from(selectEl.options).some(opt => opt.value === product.category);
+            if (optionExists) {
+                selectEl.value = product.category;
+                toggleCustomCategory(product.category);
+            } else {
+                selectEl.value = '__custom__';
+                toggleCustomCategory('__custom__');
+                document.getElementById('prodCustomCategory').value = product.category;
+            }
+
+            // Handle image
+            if (product.image) {
+                if (product.image.startsWith('data:')) {
+                    currentFormImageBase64 = product.image;
+                    document.getElementById('prodImageUrl').value = '';
+                } else {
+                    currentFormImageBase64 = '';
+                    document.getElementById('prodImageUrl').value = product.image;
+                }
+                showImagePreview(product.image);
+            } else {
+                clearFormImage();
+            }
+
+            // Update form labels
+            document.getElementById('formHeading').innerHTML = `<i data-lucide="edit-3" class="w-5 h-5 text-brand-600"></i><span>Edit Product</span>`;
+            document.getElementById('saveProductBtn').innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Update Product</span>`;
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            lucide.createIcons();
+
+            document.getElementById('productForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetProductForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('editProductId').value = '';
+            toggleCustomCategory('Floor Cleaners');
+            clearFormImage();
+
+            document.getElementById('formHeading').innerHTML = `<i data-lucide="plus-square" class="w-5 h-5 text-brand-600"></i><span>Add New Product</span>`;
+            document.getElementById('saveProductBtn').innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Save Product to Catalog</span>`;
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+            lucide.createIcons();
+        }
+
+        function deleteProduct(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+
+            openConfirmModal(
+                'Delete Product?',
+                `Are you sure you want to remove "${prod.name}" from your catalog?`,
+                () => {
+                    products = products.filter(p => p.id !== id);
+                    inquiryCart = inquiryCart.filter(item => item.productId !== id);
+                    saveProductsToStorage();
+                    saveCartToStorage();
+                    renderAdminProductList();
+                    renderCatalog();
+                    renderInquiryCart();
+                    showToast('Product removed', 'info');
+                }
+            );
+        }
+
+        function confirmClearAllProducts() {
+            openConfirmModal(
+                'Clear Entire Catalog?',
+                'This will permanently delete all products from this browser. Make sure you have exported a JSON backup first.',
+                () => {
+                    products = [];
+                    inquiryCart = [];
+                    saveProductsToStorage();
+                    saveCartToStorage();
+                    renderAdminProductList();
+                    renderCatalog();
+                    renderInquiryCart();
+                    showToast('All products deleted', 'info');
+                }
+            );
+        }
+
+        function renderAdminProductList() {
+            const listEl = document.getElementById('adminProductList');
+            const emptyEl = document.getElementById('adminEmptyList');
+            const countEl = document.getElementById('adminProductCount');
+            const clearAllBtn = document.getElementById('clearAllBtn');
+
+            countEl.textContent = products.length;
+
+            if (products.length === 0) {
+                listEl.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+                clearAllBtn.classList.add('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+            clearAllBtn.classList.remove('hidden');
+
+            listEl.innerHTML = products.map(p => `
+                <div class="py-3.5 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <img 
+                            src="${escapeHtml(p.image || FALLBACK_PRODUCT_SVG)}" 
+                            onerror="this.src='${FALLBACK_PRODUCT_SVG}'"
+                            alt="${escapeHtml(p.name)}" 
+                            class="w-12 h-12 rounded-xl object-contain bg-slate-50 border border-slate-200 shrink-0 p-1"
+                        >
+                        <div class="min-w-0">
+                            <h4 class="text-sm font-semibold text-slate-900 truncate">${escapeHtml(p.name)}</h4>
+                            <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500 mt-0.5">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium">${escapeHtml(p.category)}</span>
+                                <span>• ${escapeHtml(p.unit)}</span>
+                                <span class="font-bold text-brand-700">• ৳ ${formatPrice(p.price)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="editProduct('${p.id}')" class="p-2 rounded-lg text-slate-500 hover:text-brand-700 hover:bg-brand-50 transition" title="Edit">
+                            <i data-lucide="pencil" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="deleteProduct('${p.id}')" class="p-2 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 transition" title="Delete">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        // ==================== STORE SETTINGS & JSON EXPORT / IMPORT ====================
+        function saveStoreSettings(e) {
+            e.preventDefault();
+            settings.whatsapp = document.getElementById('settingWhatsapp').value.trim().replace(/[^0-9]/g, '');
+            settings.phone = document.getElementById('settingPhone').value.trim();
+            settings.email = document.getElementById('settingEmail').value.trim();
+            const newPin = document.getElementById('settingPin').value.trim();
+            if (newPin) settings.pin = newPin;
+
+            localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+            renderSettingsToUI();
+            showToast('Store settings saved!', 'success');
+        }
+
+        function renderSettingsToUI() {
+            // Admin inputs
+            document.getElementById('settingWhatsapp').value = settings.whatsapp || '';
+            document.getElementById('settingPhone').value = settings.phone || '';
+            document.getElementById('settingEmail').value = settings.email || '';
+            document.getElementById('settingPin').value = settings.pin || '1234';
+
+            // Top bar & Footer display
+            const topContact = document.getElementById('topContactDisplay');
+            const footerPhoneRow = document.getElementById('footerPhoneRow');
+            const footerEmailRow = document.getElementById('footerEmailRow');
+            const footerNoContactHint = document.getElementById('footerNoContactHint');
+
+            let hasContact = false;
+
+            if (settings.phone || settings.whatsapp) {
+                const displayNum = settings.phone || ('+' + settings.whatsapp);
+                document.getElementById('footerPhoneText').textContent = displayNum;
+                footerPhoneRow.classList.remove('hidden');
+                topContact.innerHTML = `
+                    <span class="flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5"></i> ${escapeHtml(displayNum)}</span>
+                    <span class="flex items-center gap-1.5"><i data-lucide="globe" class="w-3.5 h-3.5"></i> hygiclean.store</span>
+                `;
+                hasContact = true;
+            } else {
+                footerPhoneRow.classList.add('hidden');
+            }
+
+            if (settings.email) {
+                document.getElementById('footerEmailText').textContent = settings.email;
+                footerEmailRow.classList.remove('hidden');
+                hasContact = true;
+            } else {
+                footerEmailRow.classList.add('hidden');
+            }
+
+            if (hasContact) {
+                footerNoContactHint.classList.add('hidden');
+            } else {
+                footerNoContactHint.classList.remove('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        function exportCatalogJSON() {
+            const payload = {
+                brand: 'HygiClean (hygiclean.store)',
+                exportedAt: new Date().toISOString(),
+                settings: {
+                    whatsapp: settings.whatsapp,
+                    phone: settings.phone,
+                    email: settings.email
+                },
+                products: products
+            };
+
+            const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(payload, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute('href', dataStr);
+            const dateTag = new Date().toISOString().slice(0, 10);
+            downloadAnchor.setAttribute('download', `hygiclean-catalog-${dateTag}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast('Catalog backup downloaded!', 'success');
+        }
+
+        function triggerQuickImport() {
+            document.getElementById('importJsonInput').click();
+        }
+
+        function importCatalogJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    const importedProducts = Array.isArray(parsed) ? parsed : parsed.products;
+
+                    if (!Array.isArray(importedProducts)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+
+                    products = importedProducts;
+                    if (parsed.settings) {
+                        settings = { ...settings, ...parsed.settings };
+                        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+                        renderSettingsToUI();
+                    }
+
+                    saveProductsToStorage();
+                    renderAdminProductList();
+                    renderCatalog();
+                    showToast(`Imported ${products.length} products successfully!`, 'success');
+                } catch (err) {
+                    showToast('Invalid JSON file format.', 'error');
+                }
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        // ==================== CUSTOMER STOREFRONT RENDERING ====================
+        function handleSearch(val) {
+            searchQuery = val.trim().toLowerCase();
+            // Sync desktop & mobile search inputs
+            document.getElementById('desktopSearchInput').value = val;
+            document.getElementById('mobileSearchInput').value = val;
+
+            document.getElementById('clearSearchDesktop').classList.toggle('hidden', !val);
+            document.getElementById('clearSearchMobile').classList.toggle('hidden', !val);
+
+            renderCatalog();
+        }
+
+        function clearSearch() {
+            handleSearch('');
+        }
+
+        function resetFilters() {
+            selectedCategory = 'All';
+            clearSearch();
+            renderCatalog();
+        }
+
+        function selectCategory(cat) {
+            selectedCategory = cat;
+            renderCatalog();
+        }
+
+        function renderCatalog() {
+            const emptyState = document.getElementById('emptyCatalogState');
+            const toolbar = document.getElementById('catalogToolbar');
+            const grid = document.getElementById('productGrid');
+            const noResults = document.getElementById('noSearchResultsState');
+
+            // 1. Fresh Empty State when 0 products exist
+            if (products.length === 0) {
+                emptyState.classList.remove('hidden');
+                toolbar.classList.add('hidden');
+                toolbar.classList.remove('flex');
+                noResults.classList.add('hidden');
+                grid.innerHTML = '';
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            toolbar.classList.remove('hidden');
+            toolbar.classList.add('flex');
+
+            // 2. Render Dynamic Category Pills
+            const categories = ['All', ...new Set(products.map(p => p.category))];
+            if (!categories.includes(selectedCategory)) selectedCategory = 'All';
+
+            const pillsContainer = document.getElementById('categoryPillsContainer');
+            pillsContainer.innerHTML = categories.map(cat => {
+                const isActive = cat === selectedCategory;
+                return `
+                    <button 
+                        onclick="selectCategory('${escapeHtml(cat).replace(/'/g, "\\'")}')"
+                        class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all ${
+                            isActive 
+                            ? 'bg-brand-600 text-white shadow-xs' 
+                            : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-300 hover:text-brand-700'
+                        }"
+                    >
+                        ${escapeHtml(cat)}
+                    </button>
+                `;
+            }).join('');
+
+            // 3. Filter & Sort Products
+            let filtered = products.filter(p => {
+                const matchesCat = selectedCategory === 'All' || p.category === selectedCategory;
+                const matchesQuery = !searchQuery || 
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.category.toLowerCase().includes(searchQuery) ||
+                    p.unit.toLowerCase().includes(searchQuery) ||
+                    (p.description && p.description.toLowerCase().includes(searchQuery));
+                return matchesCat && matchesQuery;
+            });
+
+            const sortVal = document.getElementById('sortSelect').value;
+            if (sortVal === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortVal === 'name-asc') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            document.getElementById('productCountLabel').textContent = `${filtered.length} product${filtered.length === 1 ? '' : 's'}`;
+
+            // 4. Handle No Search Results
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            // 5. Render Product Cards
+            grid.innerHTML = filtered.map(p => {
+                const inCart = inquiryCart.find(item => item.productId === p.id);
+                return `
+                    <article class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md hover:border-brand-300 transition-all flex flex-col group animate-fade-in">
+                        <!-- Image Container -->
+                        <div onclick="openProductModal('${p.id}')" class="relative aspect-[4/3] bg-slate-50 border-b border-slate-100 flex items-center justify-center p-4 overflow-hidden cursor-pointer">
+                            <img 
+                                src="${escapeHtml(p.image || FALLBACK_PRODUCT_SVG)}" 
+                                onerror="this.src='${FALLBACK_PRODUCT_SVG}'"
+                                alt="${escapeHtml(p.name)}" 
+                                class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                            >
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 text-brand-700 border border-slate-200/80 shadow-2xs">
+                                ${escapeHtml(p.category)}
+                            </span>
+                        </div>
+
+                        <!-- Content Body -->
+                        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-1">
+                                    <span class="inline-flex items-center gap-1 font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+                                        <i data-lucide="package" class="w-3 h-3"></i>
+                                        ${escapeHtml(p.unit)}
+                                    </span>
+                                </div>
+
+                                <h3 onclick="openProductModal('${p.id}')" class="text-base font-bold text-slate-900 group-hover:text-brand-700 transition-colors line-clamp-2 cursor-pointer mt-1.5">
+                                    ${escapeHtml(p.name)}
+                                </h3>
+
+                                <p class="text-xs sm:text-sm text-slate-500 line-clamp-2 mt-1.5 leading-relaxed">
+                                    ${escapeHtml(p.description || 'Professional grade hygiene and cleaning supply.')}
+                                </p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100">
+                                <div class="flex items-baseline justify-between mb-3">
+                                    <span class="text-lg sm:text-xl font-bold text-slate-900">৳ ${formatPrice(p.price)}</span>
+                                    <span class="text-[11px] text-slate-400">per ${escapeHtml(p.unit)}</span>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="openProductModal('${p.id}')" class="py-2 px-3 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 transition flex items-center justify-center gap-1.5">
+                                        <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        <span>Details</span>
+                                    </button>
+                                    <button onclick="addToInquiryCart('${p.id}')" class="py-2 px-3 rounded-xl ${inCart ? 'bg-brand-50 text-brand-700 border border-brand-200' : 'bg-brand-600 text-white hover:bg-brand-700'} text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                                        <i data-lucide="${inCart ? 'check' : 'plus'}" class="w-3.5 h-3.5"></i>
+                                        <span>${inCart ? `Added (${inCart.qty})` : 'Add to List'}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // ==================== PRODUCT DETAIL MODAL ====================
+        function openProductModal(id) {
+            const p = products.find(item => item.id === id);
+            if (!p) return;
+
+            document.getElementById('modalCategoryBadge').textContent = p.category;
+            const imgEl = document.getElementById('modalProductImg');
+            imgEl.src = p.image || FALLBACK_PRODUCT_SVG;
+            imgEl.onerror = () => { imgEl.src = FALLBACK_PRODUCT_SVG; };
+
+            document.getElementById('modalProductName').textContent = p.name;
+            document.getElementById('modalProductUnit').innerHTML = `<i data-lucide="package" class="w-3.5 h-3.5"></i><span>${escapeHtml(p.unit)}</span>`;
+            document.getElementById('modalProductPrice').textContent = `৳ ${formatPrice(p.price)}`;
+            document.getElementById('modalProductDesc').textContent = p.description || 'Contact HygiClean for full technical datasheet, MSDS, and bulk B2B pricing.';
+
+            document.getElementById('modalAddToInquiryBtn').onclick = () => {
+                addToInquiryCart(p.id);
+                closeProductModal();
+                toggleInquiryDrawer(true);
+            };
+
+            document.getElementById('modalDirectWhatsappBtn').onclick = () => {
+                const msg = `Hello HygiClean (hygiclean.store),\nI would like to inquire about:\n\n• *${p.name}*\n• Pack/Unit: ${p.unit}\n• Listed Price: ৳ ${formatPrice(p.price)}\n\nPlease share availability and order details.`;
+                openWhatsAppWithText(msg);
+            };
+
+            document.getElementById('productDetailModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hidden');
+        }
+
+        // ==================== INQUIRY / QUOTE CART DRAWER ====================
+        function toggleInquiryDrawer(open) {
+            const overlay = document.getElementById('inquiryDrawerOverlay');
+            const drawer = document.getElementById('inquiryDrawer');
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    drawer.classList.remove('translate-x-full');
+                });
+                renderInquiryCart();
+            } else {
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 280);
+            }
+        }
+
+        function addToInquiryCart(productId) {
+            const existing = inquiryCart.find(item => item.productId === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                inquiryCart.push({ productId, qty: 1 });
+            }
+            saveCartToStorage();
+            renderInquiryCart();
+            renderCatalog();
+            showToast('Added to Inquiry List', 'success');
+        }
+
+        function updateCartQty(productId, delta) {
+            const idx = inquiryCart.findIndex(item => item.productId === productId);
+            if (idx === -1) return;
+
+            inquiryCart[idx].qty += delta;
+            if (inquiryCart[idx].qty <= 0) {
+                inquiryCart.splice(idx, 1);
+            }
+            saveCartToStorage();
+            renderInquiryCart();
+            renderCatalog();
+        }
+
+        function clearInquiryCart() {
+            inquiryCart = [];
+            saveCartToStorage();
+            renderInquiryCart();
+            renderCatalog();
+        }
+
+        function renderInquiryCart() {
+            const badge = document.getElementById('cartBadge');
+            const container = document.getElementById('inquiryItemsContainer');
+            const footer = document.getElementById('inquiryDrawerFooter');
+            const totalEl = document.getElementById('inquiryTotalAmount');
+
+            const totalItemsCount = inquiryCart.reduce((sum, item) => sum + item.qty, 0);
+            badge.textContent = totalItemsCount;
+
+            if (inquiryCart.length === 0) {
+                footer.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 px-4">
+                        <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mb-3">
+                            <i data-lucide="clipboard" class="w-7 h-7"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900">Your Inquiry List is Empty</h4>
+                        <p class="text-xs text-slate-500 mt-1 max-w-xs">Browse products and add items to build a bulk quote or retail order summary.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            let grandTotal = 0;
+
+            container.innerHTML = inquiryCart.map(item => {
+                const prod = products.find(p => p.id === item.productId);
+                if (!prod) return '';
+                const lineTotal = prod.price * item.qty;
+                grandTotal += lineTotal;
+
+                return `
+                    <div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <img src="${escapeHtml(prod.image || FALLBACK_PRODUCT_SVG)}" onerror="this.src='${FALLBACK_PRODUCT_SVG}'" class="w-11 h-11 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 shrink-0">
+                            <div class="min-w-0">
+                                <h5 class="text-xs sm:text-sm font-semibold text-slate-900 truncate">${escapeHtml(prod.name)}</h5>
+                                <p class="text-[11px] text-slate-500">${escapeHtml(prod.unit)} • ৳ ${formatPrice(prod.price)}</p>
+                                <p class="text-xs font-bold text-brand-700 mt-0.5">৳ ${formatPrice(lineTotal)}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 bg-slate-100 rounded-lg p-1 shrink-0">
+                            <button onclick="updateCartQty('${prod.id}', -1)" class="w-6 h-6 rounded-md bg-white text-slate-700 flex items-center justify-center hover:bg-slate-200 transition font-bold text-xs">-</button>
+                            <span class="w-6 text-center text-xs font-bold text-slate-800">${item.qty}</span>
+                            <button onclick="updateCartQty('${prod.id}', 1)" class="w-6 h-6 rounded-md bg-white text-slate-700 flex items-center justify-center hover:bg-slate-200 transition font-bold text-xs">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.textContent = `৳ ${formatPrice(grandTotal)}`;
+            lucide.createIcons();
+        }
+
+        function buildOrderSummaryText() {
+            const orgName = document.getElementById('customerOrgInput').value.trim();
+            let grandTotal = 0;
+
+            const lines = inquiryCart.map((item, index) => {
+                const prod = products.find(p => p.id === item.productId);
+                if (!prod) return '';
+                const sub = prod.price * item.qty;
+                grandTotal += sub;
+                return `${index + 1}. ${prod.name} (${prod.unit}) x ${item.qty} = ৳ ${formatPrice(sub)}`;
+            }).filter(Boolean);
+
+            let message = `*HygiClean Order / Quote Inquiry*\nSource: hygiclean.store\n`;
+            if (orgName) message += `Customer / Org: ${orgName}\n`;
+            message += `\n*Requested Items:*\n${lines.join('\n')}\n\n*Estimated Total: ৳ ${formatPrice(grandTotal)}*\n\nPlease confirm availability and delivery schedule.`;
+            return message;
+        }
+
+        function sendInquiryViaWhatsApp() {
+            if (inquiryCart.length === 0) return;
+            const summary = buildOrderSummaryText();
+            openWhatsAppWithText(summary);
+        }
+
+        function openWhatsAppWithText(text) {
+            const encoded = encodeURIComponent(text);
+            const phone = settings.whatsapp ? settings.whatsapp.replace(/[^0-9]/g, '') : '';
+            const waUrl = phone ? `https://wa.me/${phone}?text=${encoded}` : `https://wa.me/?text=${encoded}`;
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function copyInquirySummary() {
+            if (inquiryCart.length === 0) return;
+            const text = buildOrderSummaryText();
+
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Order summary copied to clipboard!', 'success');
+            } catch (err) {
+                showToast('Unable to copy text', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ==================== UTILITIES (CONFIRM MODAL, TOAST, FORMATTERS) ====================
+        function openConfirmModal(title, message, onConfirm) {
+            document.getElementById('confirmTitle').textContent = title;
+            document.getElementById('confirmMessage').textContent = message;
+            pendingConfirmCallback = onConfirm;
+            document.getElementById('confirmProceedBtn').onclick = () => {
+                if (pendingConfirmCallback) pendingConfirmCallback();
+                closeConfirmModal();
+            };
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            pendingConfirmCallback = null;
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            const colors = {
+                success: 'bg-slate-900 text-white border-brand-500',
+                error: 'bg-red-600 text-white border-red-400',
+                info: 'bg-slate-800 text-white border-slate-600'
+            };
+
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl shadow-lg border-l-4 text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fade-in ${colors[type] || colors.info}`;
+            toast.innerHTML = `<span>${escapeHtml(message)}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.25s ease';
+                setTimeout(() => toast.remove(), 260);
+            }, 3000);
+        }
+
+        function formatPrice(num) {
+            return Number(num || 0).toLocaleString('en-BD', {
+                minimumFractionDigits: num % 1 === 0 ? 0 : 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+    </script>
+</body>
+</html>
